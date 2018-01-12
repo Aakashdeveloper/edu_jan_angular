@@ -10,11 +10,46 @@ var core_1 = require("@angular/core");
 var ProductListComponent = /** @class */ (function () {
     function ProductListComponent() {
         this.title = "**Product List **";
+        this.showImage = false;
+        this.imageWidth = 50;
+        this.products = [
+            {
+                "productId": 1,
+                "productName": "Leaf Rake",
+                "productCode": "GDN-0011",
+                "releaseDate": "March 19, 2016",
+                "description": "Leaf rake with 48-inch wooden handle.",
+                "price": 19.95,
+                "starRating": 3.5,
+                "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
+            },
+            {
+                "productId": 2,
+                "productName": "Garden Cart",
+                "productCode": "GDN-0023",
+                "releaseDate": "March 18, 2016",
+                "description": "15 gallon capacity rolling garden cart",
+                "price": 32.99,
+                "starRating": 4.8,
+                "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+            }
+        ];
     }
+    ProductListComponent.prototype.toggleImage = function () {
+        this.showImage = !this.showImage;
+    };
+    ProductListComponent.prototype.ngOnInit = function () {
+        console.log("hiiii this is On Init");
+    };
+    ProductListComponent.prototype.onRatingClicked = function (message) {
+        this.title = "Product List" + message;
+    };
     ProductListComponent = __decorate([
         core_1.Component({
             selector: 'edu-product',
-            templateUrl: 'app/products/prouctlist.component.html'
+            templateUrl: 'app/products/prouctlist.component.html',
+            //styles:['thead{color:red}]
+            styleUrls: ['app/products/productlist.component.css']
         })
     ], ProductListComponent);
     return ProductListComponent;
@@ -22,9 +57,14 @@ var ProductListComponent = /** @class */ (function () {
 exports.ProductListComponent = ProductListComponent;
 /*
 one way
-    --data
-    --event
-    --property
-Two way
+    --data {{}}
+    --event ()
+    --property []
+Two way [()]
+component
+module
+pipe
+service
+gaurds
 */ 
 //# sourceMappingURL=product.component.js.map
