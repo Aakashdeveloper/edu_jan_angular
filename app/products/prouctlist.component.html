@@ -36,12 +36,18 @@
                     <tr *ngFor="let product of products| productFilter:filterProduct">
                         <td><img [src]="product.imageUrl" *ngIf="showImage"
                             [style.width.px]="imageWidth"/></td>
-                        <td>{{product.productName|uppercase}}</td>
+                        <td><a [routerLink]="['/products',product.productId]"
+                                [queryParams]="{name:product.productName,desc:product.description,img:product.imageUrl}">
+                                {{product.productName|uppercase}}
+                            </a>
+                        </td>
                         <td>{{product.productCode|lowercase}}</td>
                         <td>{{product.releaseDate}}</td>
                         <td>{{product.price|currency:'INR':true}}</td>
                         <td><edu-star [rating]="product.starRating"
-                                (ratingClicked)='onRatingClicked($event)'></edu-star> </td>
+                                (ratingClicked)='onRatingClicked($event)'>
+                            </edu-star> 
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -10,6 +10,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
 var car_component_1 = require("./car.component");
 var product_component_1 = require("./products/product.component");
@@ -20,6 +21,7 @@ var product_detail_component_1 = require("./products/product-detail.component");
 var notFound_component_1 = require("./shared/notFound.component");
 var home_component_1 = require("./home/home.component");
 var order_component_1 = require("./orders/order.component");
+var product_gaurd_service_1 = require("./products/product-gaurd.service");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -28,7 +30,16 @@ var AppModule = /** @class */ (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                http_1.HttpModule
+                http_1.HttpModule,
+                router_1.RouterModule.forRoot([
+                    { path: 'products', component: product_component_1.ProductListComponent },
+                    { path: 'products/:id',
+                        canActivate: [product_gaurd_service_1.ProductGaurds], component: product_detail_component_1.ProductDetailComponent },
+                    { path: 'orders', component: order_component_1.OrderComponent },
+                    { path: 'home', component: home_component_1.HomeComponent },
+                    { path: '', redirectTo: 'home', pathMatch: 'full' },
+                    { path: '**', component: notFound_component_1.NotFound },
+                ])
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -42,7 +53,7 @@ var AppModule = /** @class */ (function () {
                 order_component_1.OrderComponent
             ],
             providers: [
-                product_service_1.ProductService
+                product_service_1.ProductService, product_gaurd_service_1.ProductGaurds
             ],
             bootstrap: [
                 app_component_1.AppComponent
